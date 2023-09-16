@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[left=1cm, right=1cm, top=1cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta}
+
+\renewcommand{\arraystretch}{1.5} % Adjust the vertical spacing
+
+\begin{document}
+
+\begin{tikzpicture}[
+    node distance=2.5cm,
+    class/.style={draw, rectangle, text width=5cm, text centered, minimum height=4cm},
+    association/.style={-Stealth, thick},
+  ]
+  % Define the classes
+  \node[class] (EuclidGame) {
+    \textbf{EuclidGame}
+    \vspace{10pt} \\
+    \tiny
+    \begin{itemize}
+      \item[$-$] ConceptList: List<EuclidConcept> \\ \textit{Lista de conceptos de Euclides.} 
+      \item[$-$] DemonstrationList: List<EuclidDemonstration> \\  \textit{Lista de demostraciones.} 
+      \item[$+$] IniciarJuego(): void \\ \textit{Inicializa los conceptos y demostraciones iniciales.}
+      \item[$+$] CambiarConcepto(concepto: EuclidConcept): void \\ \textit{Cambia el concepto actual.}
+      \item[$+$] MostrarDemostracion(demostracion: EuclidDemonstration): void \\ \textit{Muestra una demostración específica.} 
+      \item[$+$] MostrarMenu(): void \\ \textit{Muestra el menú de selección de conceptos o demostraciones.} 
+    \end{itemize}
+  };
+
+  \node[class, below=of EuclidGame] (EuclidConcept) {
+    \textbf{EuclidConcept}
+    \tiny
+    \begin{itemize}
+      \item[$-$] Content: string \\ \textit{Contenido del concepto (texto).} 
+      \item[$-$] ImageLoader: EuclidImageLoader \\ \textit{Instancia de la clase para cargar imágenes.} 
+      \item[$+$] MostrarConcepto(): void \\ \textit{Renderiza el contenido del concepto en pantalla.} 
+      \item[$+$] MostrarImagen(imagen: string): void \\ \textit{Carga y muestra imágenes relacionadas.} 
+    \end{itemize}
+  };
+
+  \node[class, right=of EuclidConcept] (EuclidDemonstration) {
+    \textbf{EuclidDemonstration}
+    \tiny
+    \begin{itemize}
+      \item[$-$] LogicalSteps: List<string> \\ \textit{Pasos lógicos de la demostración.} 
+      \item[$-$] GraphicSteps: List<string> \\ \textit{Pasos gráficos de la demostración.} 
+      \item[$+$] MostrarDemostracion(): void \\ \textit{Renderiza los pasos lógicos y gráficos.} 
+    \end{itemize}
+  };
+
+  \node[class, below=of EuclidDemonstration] (EuclidImageLoader) {
+    \textbf{EuclidImageLoader}
+    \tiny
+    \begin{itemize}
+      \item[$+$] CargarImagen(imagen: string): void \\ \textit{Carga una imagen específica.} 
+    \end{itemize}
+  };
+
+  \node[class, right=of EuclidGame] (EuclidInputHandler) {
+    \textbf{EuclidInputHandler}
+    \tiny
+    \begin{itemize}
+      \item[$+$] ManejarInput(input: InputEvent): void \\ \textit{Procesa la entrada del usuario.} 
+    \end{itemize}
+  };
+
+  \node[class, right=of, above=of EuclidInputHandler] (EuclidMenu) {
+    \textbf{EuclidMenu}
+    \tiny
+    \begin{itemize}
+      \item[$-$] Options: List<string> \\ \textit{Lista de opciones de menú.} 
+      \item[$+$] MostrarMenu(): void \\ \textit{Muestra las opciones de menú.} 
+      \item[$+$] SeleccionarOpcion(opcion: string): void \\ \textit{Maneja la selección del jugador.} 
+    \end{itemize}
+  };
+
+  % Define the associations
+  \draw[association] (EuclidGame) -- (EuclidConcept) node[midway, left] {1..*};
+  \draw[association] (EuclidGame) -- (EuclidDemonstration) node[midway, above] {1..*};
+  \draw[association] (EuclidGame) -- (EuclidImageLoader) node[midway, above] {1};
+  \draw[association] (EuclidGame) -- (EuclidInputHandler) node[midway, above] {1};
+  \draw[association] (EuclidGame) -- (EuclidMenu) node[midway, right] {1};
+
+\end{tikzpicture}
+
+\end{document}
