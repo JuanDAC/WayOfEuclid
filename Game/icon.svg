@@ -1,0 +1,10 @@
+<svg height="128" width="128" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 100 100">
+  <!-- Palo vertical de la "K" -->
+  <rect x="27" y="10" width="12" height="80" fill="#da0160" />
+
+  <!-- Inclinado superior de la "K" -->
+  <polygon points="77,10 62,10 27,50 27,70" fill="#d2d700" />
+
+  <!-- Inclinado inferior de la "K" -->
+  <polygon points="77,90 62,90 27,50 27,30" fill="#519694" />
+</svg>

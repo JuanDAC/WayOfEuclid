@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cb5sfh364qex"]
+
+[node name="Node" type="Node"]
+
+[node name="Views" type="Node" parent="."]
+
+[node name="Menu" type="Node2D" parent="Views"]
+
+[node name="Construct" type="Node2D" parent="Views"]
+
+[node name="Proposition" type="Node2D" parent="Views"]
